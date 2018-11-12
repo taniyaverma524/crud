@@ -1,0 +1,70 @@
+{% load static %}
+<html>
+<head>  
+    <meta charset="UTF-8">  
+    <title>Employee Records</title>  
+     {% load staticfiles %}  
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>  
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>  
+<body background="{% static 'large.jpg' %}">  
+    <form action="/search" method="POST">
+        {% csrf_token %}
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">ENTER NAME:</label>  
+    <div class="col-sm-4"> 
+    <input type="text" name="search_box" placeholder=" Enter Employee Name :"></input> 
+      </div>  
+  </div> 
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"> </label>  
+    <div class="col-sm-4">  
+    <button type="submit" class="btn btn-primary">SEARCH DETAILS</button>  
+    </div>
+  </div>
+</form>
+
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead-dark">  
+    <tr>  
+        <th>Employee ID</th>  
+        <th>Employee Name</th>  
+        <th>Employee Email</th>  
+        <th>Employee Contact</th> 
+        <th>Employee Age</th>
+        <th>Employee address</th>
+        <th>Employee language</th> 
+        <th>Employee image</th>
+        <th>Actions</th>  
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for employee in employees %}  
+    <tr>  
+        <td>{{ employee.eid }}</td>  
+        <td>{{ employee.ename }}</td>  
+        <td>{{ employee.eemail }}</td>  
+        <td>{{ employee.econtact }}</td>
+        <td>{{ employee.eage }}</td> 
+        <td>{{ employee.eaddress}}</td> 
+        <td>{{ employee.eLK}}</td>
+        <td><img src="media/{{ employee.eimage}}" width=300px/></td>
+        <td>  
+            <a href="/edit/{{ employee.id }}"><span class="glyphicon glyphicon-pencil" >Edit</span></a>  
+            <a href="/delete/{{ employee.id }}">Delete</a>  
+        </td>  
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+<br>  
+<br>  
+<center><a href="/emp" class="btn btn-primary">Add New Record</a></center>  
+
+<button><a href="/logout">logout</a></button>
+
+
+</body>  
+</html>  

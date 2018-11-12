@@ -1,0 +1,10 @@
+{% load static %}
+<html>
+		<body background="{% static 'large.jpg' %}">
+		
+			<form action="/rr" method=get >
+			{% csrf_token %}
+		<center><button type=submit><h1>Submit</h1></button></center>
+			</form>
+		</body>
+</html>
